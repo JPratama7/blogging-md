@@ -3,6 +3,7 @@ package main
 import (
 	"aidanwoods.dev/go-paseto"
 	"blogging-md/repository/blog"
+	"blogging-md/repository/comment"
 	"blogging-md/repository/user"
 	"blogging-md/router"
 	"blogging-md/util"
@@ -50,6 +51,7 @@ func main() {
 
 	userRepo := user.New(db)
 	blogPostRepo := blog.New(db)
+	commentsRepo := comment.New(db)
 
 	route.Use(middleware.AllowContentType("application/json"))
 	route.Use(middleware.Logger)
@@ -59,8 +61,10 @@ func main() {
 	route.Use(util.InsertToRequest("userDb", userRepo))
 	route.Use(util.InsertToRequest("tokenizer", tokenizer))
 	route.Use(util.InsertToRequest("blogRepo", blogPostRepo))
+	route.Use(util.InsertToRequest("commentsRepo", commentsRepo))
 
 	router.UserRoute(route)
+	router.PostRoute(route)
 
 	log.Println("Server started on port " + os.Getenv("PORT"))
 	log.Fatalln(http.ListenAndServe(":"+os.Getenv("PORT"), route))
