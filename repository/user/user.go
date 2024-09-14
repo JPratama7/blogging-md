@@ -39,7 +39,7 @@ func (u *userRepoImpl) FindByEmail(c context.Context, email string) (res model.U
 	return
 }
 
-func (u *userRepoImpl) FindByID(c context.Context, id string) (res model.User, err error) {
+func (u *userRepoImpl) FindByID(c context.Context, id xid.ID) (res model.User, err error) {
 	query := gsql.NewSelectBuilder()
 	query.Select("id", "name", "email", "password_hash", "created_at", "updated_at")
 	query.From("users")
