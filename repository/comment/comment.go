@@ -6,6 +6,7 @@ import (
 	"context"
 	gsql "github.com/huandu/go-sqlbuilder"
 	"github.com/jmoiron/sqlx"
+	"github.com/rs/xid"
 )
 
 type commentRepoImpl struct {
@@ -20,7 +21,7 @@ func New(db *sqlx.DB) repository.CommentRepository {
 
 func (cr commentRepoImpl) Create(c context.Context, comment model.Comment) (res model.Comment, err error) {
 	res = comment
-	res.ID = comment.ID
+	res.ID = xid.New()
 
 	query := gsql.NewStruct(&res).InsertInto("comments")
 	query.SetFlavor(gsql.MySQL)
@@ -31,16 +32,16 @@ func (cr commentRepoImpl) Create(c context.Context, comment model.Comment) (res 
 	return
 }
 
-func (cr commentRepoImpl) FindByIDPost(c context.Context, idPost string) (res model.Comment, err error) {
+func (cr commentRepoImpl) FindByIDPost(c context.Context, idPost xid.ID) (res []model.Comment, err error) {
 	query := gsql.NewSelectBuilder()
-	query.Select("id", "content", "author_id", "created_at", "updated_at")
+	query.Select("id", "content", "author_name", "created_at", "updated_at")
 	query.From("comments")
 	query.Where(query.Equal("id_post", idPost))
 	query.SetFlavor(gsql.MySQL)
 
 	q, args := query.Build()
 
-	err = cr.db.GetContext(c, &res, q, args...)
+	err = cr.db.SelectContext(c, &res, q, args...)
 
 	return
 }

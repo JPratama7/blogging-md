@@ -49,7 +49,7 @@ func (p postRepoImpl) Fetch(c context.Context, page, size int) (res []model.Blog
 	return
 }
 
-func (p postRepoImpl) FindByID(c context.Context, id string) (res model.BlogPost, err error) {
+func (p postRepoImpl) FindByID(c context.Context, id xid.ID) (res model.BlogPost, err error) {
 	query := gsql.NewSelectBuilder()
 	query.Select("id", "title", "content", "author_id", "created_at", "updated_at")
 	query.From("blog_posts")
@@ -85,7 +85,7 @@ func (p postRepoImpl) Update(c context.Context, post model.BlogPost) (res model.
 	return
 }
 
-func (p postRepoImpl) Delete(c context.Context, id string) (res model.BlogPost, err error) {
+func (p postRepoImpl) Delete(c context.Context, id xid.ID) (res model.BlogPost, err error) {
 	query := gsql.
 		NewDeleteBuilder().
 		DeleteFrom("blog_posts")
