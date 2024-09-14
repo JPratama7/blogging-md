@@ -141,14 +141,25 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tokenized := tokenizer.Encrypt(
+	tokenized, err := tokenizer.Encrypt(
 		token.WithClaims("id", user.ID.String()),
+		token.WithExpiration(time.Hour*24),
+		token.WithIssuer("blogging-md"),
+		token.WithAudience("for-blogging-md"),
 	)
+	if err != nil {
+		util.NewError().
+			SetCode(http.StatusInternalServerError).
+			SetStatus("Failed To Encrypt Token").
+			Write(w)
+		return
+	}
 
 	util.NewResponse[responses.Login]().
 		SetCode(http.StatusOK).
 		SetStatus("Successfully Logged In").
 		SetData(responses.Login{
 			Token: tokenized,
-		})
+		}).Write(w)
+	return
 }
