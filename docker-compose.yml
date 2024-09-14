@@ -1,0 +1,27 @@
+name: blogging-md
+
+services:
+  blogging-md:
+    scale: 2
+    privileged: false
+    depends_on:
+      - db
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - GOPATH=/app
+
+  db:
+    image: docker.io/mysql:8.0
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=blogging
+      - MYSQL_USER=blogging
+      - MYSQL_PASSWORD=blogging
+    volumes:
+      - ./db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
