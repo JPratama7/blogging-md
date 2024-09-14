@@ -1,0 +1,723 @@
+{
+	"info": {
+		"_postman_id": "ee618859-95bb-42f7-96ea-d90faaca5dad",
+		"name": "Blogger MD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16359547"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"JP7\",\n    \"email\": \"jp7@mail.to\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/register",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Exist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"JP7\",\n    \"email\": \"jp7@mail.to\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Sep 2024 17:55:04 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 400,\n    \"success\": false,\n    \"status\": \"Email Already Exists\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jp7@mail.to\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/login",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"jp7@mail.to\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Sep 2024 18:00:55 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "216"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"success\": true,\n    \"status\": \"Successfully Logged In\",\n    \"data\": {\n        \"token\": \"v4.public.eyJpZCI6ImNyaXJrc2c5OHVuYm9lMTloMTkwIn1-y6w3voPHM0HuWVwWastdY1yhfEg2FpHDFP9DaN2kY1pLUH_kVB1HUAszepySO9oexFIUm0VeeGbqBblDhEAE\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Testing\",\n    \"content\": \"Testing Content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Testing\",\n    \"content\": \"Testing Content\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Sep 2024 18:23:28 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "285"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"success\": true,\n    \"status\": \"Successfully Created Post\",\n    \"data\": {\n        \"id\": \"crit97898unfdj6qud2g\",\n        \"title\": \"Testing\",\n        \"content\": \"Testing Content\",\n        \"author_id\": \"crirksg98unboe19h190\",\n        \"created_at\": \"2024-09-15T01:23:25.657053588+07:00\",\n        \"updated_at\": \"2024-09-15T01:23:25.657053688+07:00\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"JP7\",\n    \"email\": \"jp7@mail.to\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"JP7\",\n    \"email\": \"jp7@mail.to\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Sep 2024 19:03:21 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "258"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"success\": true,\n    \"status\": \"Successfully Fetched Posts\",\n    \"data\": [\n        {\n            \"id\": \"crit97898unfdj6qud2g\",\n            \"title\": \"Testing\",\n            \"content\": \"Testing Content\",\n            \"author_id\": \"crirksg98unboe19h190\",\n            \"created_at\": \"2024-09-14T18:23:26Z\",\n            \"updated_at\": \"2024-09-14T18:23:26Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Post By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"JP7\",\n    \"email\": \"jp7@mail.to\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"JP7\",\n    \"email\": \"jp7@mail.to\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "crit97898unfdj6qud2g"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Sep 2024 19:05:39 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "247"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"success\": true,\n    \"status\": \"Successfully Updated Post\",\n    \"data\": {\n        \"id\": \"crit97898unfdj6qud2g\",\n        \"title\": \"\",\n        \"content\": \"\",\n        \"author_id\": \"crirksg98unboe19h190\",\n        \"created_at\": \"2024-09-14T18:23:26Z\",\n        \"updated_at\": \"2024-09-15T02:05:39.72689342+07:00\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Testing\",\n    \"content\": \"Testing Content Updated\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts/:id",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "crit97898unfdj6qud2g"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Testing\",\n    \"content\": \"Testing Content Updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "crit97898unfdj6qud2g"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Sep 2024 19:09:56 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "278"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"success\": true,\n    \"status\": \"Successfully Updated Post\",\n    \"data\": {\n        \"id\": \"crit97898unfdj6qud2g\",\n        \"title\": \"Testing\",\n        \"content\": \"Testing Content Updated\",\n        \"author_id\": \"crirksg98unboe19h190\",\n        \"created_at\": \"2024-09-14T18:23:26Z\",\n        \"updated_at\": \"2024-09-15T02:09:56.542980893+07:00\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Testing\",\n    \"content\": \"Testing Content Updated\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts/:id",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "critv4898un4qgctupcg"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Testing\",\n    \"content\": \"Testing Content Updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts/:id",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "critv4898un4qgctupcg"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Sep 2024 19:10:40 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "255"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"success\": true,\n    \"status\": \"Successfully Deleted Post\",\n    \"data\": {\n        \"id\": \"critv4898un4qgctupcg\",\n        \"title\": \"Testing\",\n        \"content\": \"Testing Content\",\n        \"author_id\": \"crirksg98unboe19h190\",\n        \"created_at\": \"2024-09-14T19:10:10Z\",\n        \"updated_at\": \"2024-09-14T19:10:10Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Post Comments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Testing\",\n    \"content\": \"Testing Content Updated\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts/:id/comments",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts",
+						":id",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "crit97898unfdj6qud2g"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Comments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"Commented\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/posts/:id/comments",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"posts",
+						":id",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "crit97898unfdj6qud2g"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Post Comments",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Commented\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/posts/:id/comments",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"posts",
+								":id",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "crit97898unfdj6qud2g"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 Sep 2024 19:14:35 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "211"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"success\": true,\n    \"status\": \"Successfully Created Comment\",\n    \"data\": {\n        \"id\": null,\n        \"post_id\": \"crit97898unfdj6qud2g\",\n        \"author_id\": \"JP7\",\n        \"content\": \"Commented\",\n        \"created_at\": \"2024-09-15T02:14:29.141615427+07:00\"\n    }\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "v4.public.eyJhdWQiOiJmb3ItYmxvZ2dpbmctbWQiLCJleHAiOiIyMDI0LTA5LTE2VDAxOjE1OjMwKzA3OjAwIiwiaWQiOiJjcmlya3NnOTh1bmJvZTE5aDE5MCIsImlzcyI6ImJsb2dnaW5nLW1kIn3gZYYP-n2Dn5SLf0fE44cn8WxRoMX_eWKA1VSse9vPTB6FTAgA_-zOw_64sVK3IJwojErIv3tCErDWU3V5MeoC",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost",
+			"type": "string"
+		}
+	]
+}

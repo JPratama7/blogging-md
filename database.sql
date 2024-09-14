@@ -29,6 +29,3 @@ CREATE TABLE comments (
 CREATE INDEX idx_email ON users (email);
 
 CREATE INDEX idx_author_created ON blog_posts (author_id, created_at);
-
-
-select * from users
