@@ -25,7 +25,7 @@ func Fetch(w http.ResponseWriter, r *http.Request) {
 	tokenizer, err := util.ExtractFromRequest[token.Token](r, "tokenizer")
 	if err != nil {
 		util.NewError().
-			SetStatus("Unauthorized").
+			SetStatus("Failed To Extract Token").
 			SetCode(http.StatusUnauthorized).
 			Write(w)
 		return
@@ -77,7 +77,7 @@ func Fetch(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	page := util.ExtractQuery(r, "page", "1")
+	page := util.ExtractQuery(r, "page", "0")
 	size := util.ExtractQuery(r, "page_size", "10")
 
 	pageInt, err := strconv.Atoi(page)
@@ -421,7 +421,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 	post.Content = req.Content
 	post.UpdatedAt = time.Now()
 
-	_, err = postDb.Update(r.Context(), post)
+	post, err = postDb.Update(r.Context(), post)
 	if err != nil {
 		util.NewError().
 			SetStatus("Failed To Update Post").
