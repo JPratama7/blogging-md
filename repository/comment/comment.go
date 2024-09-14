@@ -23,7 +23,7 @@ func (cr commentRepoImpl) Create(c context.Context, comment model.Comment) (res 
 	res = comment
 	res.ID = xid.New()
 
-	query := gsql.NewStruct(&res).InsertInto("comments")
+	query := gsql.NewStruct(&res).InsertInto("comments", &res)
 	query.SetFlavor(gsql.MySQL)
 
 	q, args := query.Build()
@@ -34,9 +34,9 @@ func (cr commentRepoImpl) Create(c context.Context, comment model.Comment) (res 
 
 func (cr commentRepoImpl) FindByIDPost(c context.Context, idPost xid.ID) (res []model.Comment, err error) {
 	query := gsql.NewSelectBuilder()
-	query.Select("id", "content", "author_name", "created_at", "updated_at")
+	query.Select("id", "content", "author_name", "created_at")
 	query.From("comments")
-	query.Where(query.Equal("id_post", idPost))
+	query.Where(query.Equal("post_id", idPost))
 	query.SetFlavor(gsql.MySQL)
 
 	q, args := query.Build()

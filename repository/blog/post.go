@@ -23,13 +23,11 @@ func (p postRepoImpl) Create(c context.Context, post model.BlogPost) (res model.
 	res = post
 	res.ID = xid.New()
 
-	query := gsql.
-		NewInsertBuilder().
-		InsertInto("blog_posts").
-		Values(res).
-		SetFlavor(gsql.MySQL)
+	query := gsql.NewStruct(&res).InsertInto("blog_posts", &res)
+	query.SetFlavor(gsql.MySQL)
 
-	_, err = p.db.ExecContext(c, query.String())
+	q, args := query.Build()
+	_, err = p.db.ExecContext(c, q, args...)
 	return
 }
 
@@ -56,13 +54,9 @@ func (p postRepoImpl) FindByID(c context.Context, id xid.ID) (res model.BlogPost
 	query.Where(query.Equal("id", id))
 	query.SetFlavor(gsql.MySQL)
 
-	cur := p.db.QueryRowContext(c, query.String())
-	if cur.Err() != nil {
-		return
-	}
+	q, args := query.Build()
 
-	err = cur.Scan(&res)
-
+	err = p.db.GetContext(c, &res, q, args...)
 	return
 }
 
@@ -81,7 +75,9 @@ func (p postRepoImpl) Update(c context.Context, post model.BlogPost) (res model.
 
 	query.Where(query.Equal("id", post.ID))
 
-	_, err = p.db.ExecContext(c, query.String())
+	q, args := query.Build()
+	res = post
+	_, err = p.db.ExecContext(c, q, args...)
 	return
 }
 
@@ -93,6 +89,8 @@ func (p postRepoImpl) Delete(c context.Context, id xid.ID) (res model.BlogPost, 
 		Where(query.Equal("id", id)).
 		SetFlavor(gsql.MySQL)
 
-	_, err = p.db.ExecContext(c, query.String())
+	q, args := query.Build()
+
+	_, err = p.db.ExecContext(c, q, args...)
 	return
 }
