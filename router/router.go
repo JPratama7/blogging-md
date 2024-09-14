@@ -12,3 +12,15 @@ func UserRoute(route chi.Router) {
 	})
 
 }
+
+func PostRoute(route chi.Router) {
+	route.Group(func(r chi.Router) {
+		r.Get("/", controller.Fetch)
+		r.Post("/", controller.Create)
+		r.Get("/{id}", controller.GetPost)
+		r.Put("/{id}", controller.Update)
+		r.Delete("/{id}", controller.Delete)
+		r.Get("/{id}/comments", controller.GetComment)
+		r.Post("/{id}/comments", controller.CreateComment)
+	})
+}
