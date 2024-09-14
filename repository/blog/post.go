@@ -33,6 +33,22 @@ func (p postRepoImpl) Create(c context.Context, post model.BlogPost) (res model.
 	return
 }
 
+func (p postRepoImpl) Fetch(c context.Context, page, size int) (res []model.BlogPost, err error) {
+	query := gsql.NewSelectBuilder()
+	query.Select("id", "title", "content", "author_id", "created_at", "updated_at")
+	query.From("blog_posts")
+	query.OrderBy("created_at DESC")
+	query.Limit(size)
+	query.Offset(page * size)
+	query.SetFlavor(gsql.MySQL)
+
+	q, args := query.Build()
+
+	err = p.db.SelectContext(c, &res, q, args...)
+
+	return
+}
+
 func (p postRepoImpl) FindByID(c context.Context, id string) (res model.BlogPost, err error) {
 	query := gsql.NewSelectBuilder()
 	query.Select("id", "title", "content", "author_id", "created_at", "updated_at")
