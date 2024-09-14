@@ -59,9 +59,9 @@ func main() {
 	route.Use(middleware.Timeout(5 * time.Second))
 
 	route.Use(util.InsertToRequest("userDb", userRepo))
-	route.Use(util.InsertToRequest("tokenizer", tokenizer))
-	route.Use(util.InsertToRequest("blogRepo", blogPostRepo))
-	route.Use(util.InsertToRequest("commentsRepo", commentsRepo))
+	route.Use(util.InsertToRequest[token.Token]("tokenizer", tokenizer))
+	route.Use(util.InsertToRequest("postDb", blogPostRepo))
+	route.Use(util.InsertToRequest("commentsDb", commentsRepo))
 
 	router.UserRoute(route)
 	router.PostRoute(route)
