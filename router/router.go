@@ -14,7 +14,7 @@ func UserRoute(route chi.Router) {
 }
 
 func PostRoute(route chi.Router) {
-	route.Group(func(r chi.Router) {
+	route.Route("/posts", func(r chi.Router) {
 		r.Get("/", controller.Fetch)
 		r.Post("/", controller.Create)
 		r.Get("/{id}", controller.GetPost)
