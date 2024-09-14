@@ -10,6 +10,7 @@ import (
 	"github.com/JPratama7/util/token/option"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"log"
 	"net/http"
@@ -22,6 +23,10 @@ func main() {
 
 	db, err := sqlx.Open("mysql", os.Getenv("DB_URL"))
 	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err = db.Ping(); err != nil {
 		log.Fatal(err)
 	}
 
@@ -47,9 +52,9 @@ func main() {
 	blogPostRepo := blog.New(db)
 
 	route.Use(middleware.AllowContentType("application/json"))
-	route.Use(middleware.RequestID)
 	route.Use(middleware.Logger)
 	route.Use(middleware.Recoverer)
+	route.Use(middleware.Timeout(5 * time.Second))
 
 	route.Use(util.InsertToRequest("userDb", userRepo))
 	route.Use(util.InsertToRequest("tokenizer", tokenizer))
@@ -57,5 +62,6 @@ func main() {
 
 	router.UserRoute(route)
 
-	log.Fatal(http.ListenAndServe(":8080", route))
+	log.Println("Server started on port " + os.Getenv("PORT"))
+	log.Fatalln(http.ListenAndServe(":"+os.Getenv("PORT"), route))
 }
