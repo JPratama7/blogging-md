@@ -12,7 +12,7 @@ import (
 )
 
 func GetComment(w http.ResponseWriter, r *http.Request) {
-	commentDb, err := util.ExtractFromRequest[repository.CommentRepository](r, "commentDb")
+	commentDb, err := util.ExtractFromRequest[repository.CommentRepository](r, "commentsDb")
 	if err != nil {
 		util.NewError().
 			SetStatus("Failed To Extract Comment Repository").
@@ -92,7 +92,7 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	commentDb, err := util.ExtractFromRequest[repository.CommentRepository](r, "commentDb")
+	commentDb, err := util.ExtractFromRequest[repository.CommentRepository](r, "commentsDb")
 	if err != nil {
 		util.NewError().
 			SetStatus("Failed To Extract Comment Repository").
